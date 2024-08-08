@@ -19,7 +19,7 @@ const swalError = (text: string, heading?: string) => {
 
 const swalInfo = (text: string, heading?: string) => {
     return Swal.fire(
-        heading ?? 'Məlumat!',
+        heading ?? 'Info!',
         text,
         'info'
     );

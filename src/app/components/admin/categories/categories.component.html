@@ -77,29 +77,27 @@
                     <input type="file" accept=".mp4" #file id="fileContract" name="fileContract"
                         (change)="uploadFile($event)" class="selectfileInputPay" aria-label="0.0" />
                     <input type="text" placeholder="Video..." [value]="FF['projectFileName'].value" disable />
-                    <img (click)="file.click()" class="absolute right-0 top-0 h-full"
-                        src="../../../../../assets/icons/document-clip.svg" alt="">
+                  
                 </div>
+
+                <small class="error_text"
+                    *ngIf="(FF['projectFileName'].errors?.['required'] && !isFormValid) || (FF['projectFileName'].invalid && !isFormValid)">
+                    *Required field
+                </small>
             </div>
         </div>
 
         <div class="col-md-3">
             <div class="field">
                 <label for="title" class="font-medium text-black required-label">Title</label>
-                <input autocomplete="off" placeholder="Title..." type="text" formControlName="title" id="title" name="title" />
+                <input autocomplete="off" placeholder="Title..." type="text" formControlName="title" id="title"
+                    name="title" />
+                <small class="error_text"
+                    *ngIf="(FF['title'].errors?.['required'] && !isFormValid) || (FF['title'].invalid && !isFormValid)">
+                    *Required field
+                </small>
             </div>
         </div>
-
-        <div class="col-md-6">
-            <div class="field">
-                <label for="description" class="font-medium text-black required-label">Description</label>
-                <input autocomplete="off" type="text" placeholder="Description..." formControlName="description" id="description"
-                    name="description" />
-            </div>
-        </div>
-    </div>
-
-    <div class="row ">
         <div class="col-md-3">
             <div class="field mb-0">
                 <label for="category" class="font-medium text-black required-label">Category</label>
@@ -107,6 +105,11 @@
                     <mat-select formControlName="categoryId" id="category" name="category">
                         <mat-option *ngFor="let item of categories" [value]="item.name">{{item.name}}</mat-option>
                     </mat-select>
+
+                    <small class="error_text"
+                        *ngIf="(FF['categoryId'].errors?.['required'] && !isFormValid) || (FF['categoryId'].invalid && !isFormValid)">
+                        *Required field
+                    </small>
                 </mat-form-field>
             </div>
         </div>
@@ -116,13 +119,26 @@
                 <label for="country" class="font-medium text-black required-label">Country</label>
                 <input autocomplete="off" type="text" placeholder="Country..." formControlName="country" id="country"
                     name="country" />
+
             </div>
         </div>
+    </div>
 
+    <div class="row ">
+        <div class="col-md-6">
+            <div class="field">
+                <label for="description" class="font-medium text-black required-label">Description</label>
+                <input autocomplete="off" type="text" placeholder="Description..." formControlName="description"
+                    id="description" name="description" />
+                <small class="error_text"
+                    *ngIf="(FF['description'].errors?.['required'] && !isFormValid) || (FF['description'].invalid && !isFormValid)">
+                    *Required field
+                </small>
+            </div>
+        </div>
         <div class="col-md-3 mt-4">
             <div class="field">
-                <button type="button" class="bg-danger text-white col-12 rounded-3xl py-2"
-                    (click)="handleSaveVideo()">
+                <button type="button" class="bg-danger text-white col-12 rounded-3xl py-2" (click)="handleSaveVideo()">
                     Save
                 </button>
             </div>

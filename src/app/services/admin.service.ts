@@ -22,8 +22,15 @@ export class AdminService {
     return this.http.post<any>(`${this.baseUrl}/category`, data);
   }
 
-  saveVideo(data: any) {
-    return this.http.post<any>(`${this.baseUrl}/video`, data);
+  saveVideo(data: any, file: any) {
+    const formData = new FormData();
+    formData.append('id', data.id);
+    formData.append('categoryId', data.categoryId);
+    formData.append('country', data.country);
+    formData.append('description', data.description);
+    formData.append('title', data.title);
+    formData.append('video', file);
+    return this.http.post<any>(`${this.baseUrl}/video`, formData);
   }
 
 }

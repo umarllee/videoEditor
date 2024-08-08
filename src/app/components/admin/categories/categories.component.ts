@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { AdminService } from 'src/app/services/admin.service';
-import { swalSuccess } from 'src/app/utils/alert';
+import { swalInfo, swalSuccess } from 'src/app/utils/alert';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -16,6 +16,7 @@ export class CategoriesComponent {
   dataSource = new MatTableDataSource<any>();
   name = '';
   formGroup!: FormGroup;
+  isFormValid = true;
   categories: any[] = [];
   file?: File | null = null;
   fileResult: string | ArrayBuffer | null = null;
@@ -23,11 +24,11 @@ export class CategoriesComponent {
   generateForm() {
     this.formGroup = this.fb.group({
       id: this.UpdateData?.id ? this.UpdateData.id : 0,
-      title: [this.UpdateData?.title ? this.UpdateData?.title : ''],
-      description: [this.UpdateData?.description ? this.UpdateData?.description : ''],
-      categoryId: [this.UpdateData?.categoryId ? this.UpdateData?.categoryId : ''],
+      title: [this.UpdateData?.title ? this.UpdateData?.title : '', [Validators.required]],
+      description: [this.UpdateData?.description ? this.UpdateData?.description : '', [Validators.required]],
+      categoryId: [this.UpdateData?.categoryId ? this.UpdateData?.categoryId : '', [Validators.required]],
       country: this.UpdateData?.country ? this.UpdateData?.country : '',
-      projectFileName: this.UpdateData?.projectFileName ? this.UpdateData?.projectFileName : '',
+      projectFileName: [this.UpdateData?.projectFileName ? this.UpdateData?.projectFileName : '', [Validators.required]],
     })
   }
 
@@ -94,17 +95,37 @@ export class CategoriesComponent {
   }
 
   handleSaveCategory() {
-    this.adminService.saveCategory({ name: this.name }).subscribe({
+    this.name ? this.adminService.saveCategory({ name: this.name }).subscribe({
       next: res => {
         this.name = '';
         swalSuccess("Succesfully saved!"),
           this.getTableData();
       },
       error: err => console.log(err)
-    })
+    }) : swalInfo('Please, enter category name!')
   }
 
   handleSaveVideo() {
-    console.log(this.formGroup.value)
+    console.log(this.formGroup.value);
+    if (this.formGroup.valid) {
+      this.isFormValid = true;
+      // this.complexService.addOrUpdateComplex(this.formGroup.value, this.file).subscribe({
+      //   next: res => {
+      //     res.status ? (swalSuccess(res.message), this.onCloseDialog()) : swalError(res.message);
+      //   },
+      //   error: err => console.log(err)
+      // })
+
+      this.adminService.saveVideo(this.formGroup.value, this.file).subscribe({
+        next: res => {
+          swalSuccess(res.message)
+        },
+        error: err => console.log(err)
+      })
+    }
+
+    else {
+      this.isFormValid = false;
+    }
   }
 }
