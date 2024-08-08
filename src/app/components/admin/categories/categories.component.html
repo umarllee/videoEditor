@@ -1,6 +1,6 @@
 <div class="px-4">
-    <h4 class="mx-2 mb-3 mt-4">Category add</h4>
-    <div class="row  py-3 pb-4 rounded border-b border-dashed">
+    <h4 class="mx-2 mb-3 mt-4 pb-2 border-b border-dashed">Category add</h4>
+    <div class="row  py-3 pb-4 rounded ">
         <div class="col-md-4 border-r">
             <div class="col-md-9">
                 <div class="field relative">
@@ -66,7 +66,7 @@
     </div>
 
 
-    <h4 class="mx-2 mb-3 mt-5">Video add</h4>
+    <h4 class="mx-2 mb-3 mt-5 pb-2 border-b border-dashed">Video add</h4>
 
     <form [formGroup]="formGroup">
         <div class="row">
@@ -104,7 +104,7 @@
                     <label for="category" class="font-medium text-black required-label">Category</label>
                     <mat-form-field class="col-12">
                         <mat-select formControlName="categoryId" id="category" name="category">
-                            <mat-option *ngFor="let item of categories" [value]="item.name">{{item.name}}</mat-option>
+                            <mat-option *ngFor="let item of categories" [value]="item._id">{{item.name}}</mat-option>
                         </mat-select>
 
                         <small class="error_text"

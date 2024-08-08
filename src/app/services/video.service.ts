@@ -17,4 +17,8 @@ export class VideoService {
   getAllCategories(): Observable<any[]> {  // Yeni metod əlavə edildi
     return this.http.get<any[]>(`${this.baseUrl}/category`);
   }
+
+  deleteVideo(id:number) {  // Yeni metod əlavə edildi
+    return this.http.get<any[]>(`${this.baseUrl}/video/`+id);
+  }
 }

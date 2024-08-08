@@ -26,7 +26,7 @@ export class CategoriesComponent {
       id: this.UpdateData?.id ? this.UpdateData.id : 0,
       title: [this.UpdateData?.title ? this.UpdateData?.title : '', [Validators.required]],
       description: [this.UpdateData?.description ? this.UpdateData?.description : '', [Validators.required]],
-      categoryId: [this.UpdateData?.categoryId ? this.UpdateData?.categoryId : '', [Validators.required]],
+      categoryId: [this.UpdateData?.categoryId ? this.UpdateData?.categoryId : 0, [Validators.required]],
       country: this.UpdateData?.country ? this.UpdateData?.country : '',
       projectFileName: [this.UpdateData?.projectFileName ? this.UpdateData?.projectFileName : '', [Validators.required]],
     })
@@ -118,7 +118,9 @@ export class CategoriesComponent {
 
       this.adminService.saveVideo(this.formGroup.value, this.file).subscribe({
         next: res => {
-          swalSuccess(res.message)
+          swalSuccess("Succesfully saved!"),
+          this.UpdateData = '';
+          this.generateForm();
         },
         error: err => console.log(err)
       })

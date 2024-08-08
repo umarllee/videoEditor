@@ -1,6 +1,7 @@
 import { Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { VideoService } from 'src/app/services/video.service';
+import { swalSuccess } from 'src/app/utils/alert';
 
 @Component({
   selector: 'app-new-video',
@@ -24,8 +25,7 @@ export class NewVideoComponent {
     private fb: FormBuilder,
   ) { }
 
-  cardClicked(id: number) { 
-    console.log('test')
+  cardClicked(id: number) {
     this.filteredVideos[id].state = !this.filteredVideos[id].state;
   }
 
@@ -105,5 +105,14 @@ export class NewVideoComponent {
   onMouseDown(index: number) {
     console.log('Mouse down on video index:', index);
     // Burada mousedown hadisəsi ilə bağlı əlavə əməliyyatlar edə bilərsiniz
+  }
+
+  deleteVideo(id: number) {
+    this.videoService.deleteVideo(id).subscribe({
+      next: (res: any) => {
+        swalSuccess(res.message)
+      },
+      error: err => console.log(err)
+    })
   }
 }

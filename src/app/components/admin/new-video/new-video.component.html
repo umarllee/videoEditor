@@ -38,9 +38,12 @@
                     <div class="card-pattern cursor-pointer right-4 top-2 " (click)="cardClicked(i)">
                         <i class="fa-solid fa-info"></i>
                     </div>
+                    <!-- <div class="card-pattern cursor-pointer right-4 top-5" style="top: 40px;" (click)="deleteVideo(video._id)">
+                        <i class="fa-solid fa-trash"></i>
+                    </div> -->
 
                     <div class="circle">
-                        <video controls class="rounded-t-lg w-full" style="max-height: 50vh;">
+                        <video controls class="rounded-t-lg w-full" style="height: 50vh;">
                             <source
                             [src]="'http://localhost:7777/' + video.filePath"
                                 type="video/mp4">

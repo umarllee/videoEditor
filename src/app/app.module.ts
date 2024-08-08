@@ -15,6 +15,7 @@ import { NewVideoComponent } from './components/admin/new-video/new-video.compon
 import { MatTableModule } from '@angular/material/table';
 import { MapLocationComponent } from './components/admin/map-location/map-location.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MainComponent } from './components/main/main.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     AdminComponent,
     CategoriesComponent,
     NewVideoComponent,
-    MapLocationComponent
+    MapLocationComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,
