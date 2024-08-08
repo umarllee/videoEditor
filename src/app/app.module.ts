@@ -13,6 +13,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CategoriesComponent } from './components/admin/categories/categories.component';
 import { NewVideoComponent } from './components/admin/new-video/new-video.component';
 import { MatTableModule } from '@angular/material/table';
+import { MapLocationComponent } from './components/admin/map-location/map-location.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { MatTableModule } from '@angular/material/table';
     HomeComponent,
     AdminComponent,
     CategoriesComponent,
-    NewVideoComponent
+    NewVideoComponent,
+    MapLocationComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +35,8 @@ import { MatTableModule } from '@angular/material/table';
     MatSelectModule,
     BrowserAnimationsModule,
     MatTableModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

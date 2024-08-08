@@ -26,6 +26,7 @@ export class CategoriesComponent {
       title: [this.UpdateData?.title ? this.UpdateData?.title : ''],
       description: [this.UpdateData?.description ? this.UpdateData?.description : ''],
       categoryId: [this.UpdateData?.categoryId ? this.UpdateData?.categoryId : ''],
+      country: this.UpdateData?.country ? this.UpdateData?.country : '',
       projectFileName: this.UpdateData?.projectFileName ? this.UpdateData?.projectFileName : '',
     })
   }
@@ -103,7 +104,7 @@ export class CategoriesComponent {
     })
   }
 
-  handleSaveVideo(){
-
+  handleSaveVideo() {
+    console.log(this.formGroup.value)
   }
 }

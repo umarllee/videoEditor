@@ -73,12 +73,12 @@ input[type=number] {
 
         &:focus {
             outline: 0;
-            border-color: #266AB8;
+            border-color: #DB4444;
         }
 
         &:focus+label::before {
             color: #266AB8;
-            border-color: #266AB8;
+            border-color: #DB4444;
         }
     }
 
