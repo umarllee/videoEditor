@@ -58,7 +58,8 @@ input[type=number] {
     margin: 7px 0;
 
     input,
-    select, .mat-mdc-select{
+    select,
+    .mat-mdc-select {
         width: 100%;
         line-height: 40px;
         height: 40px;
@@ -104,4 +105,30 @@ input[type=number] {
     //     }
 
     // }
+}
+
+.selectfileInputPay {
+    position: absolute !important;
+    width: 92% !important;
+    opacity: 0;
+}
+
+.active {
+    color: #DB4444;
+    font-size: 17px;
+}
+
+.headerColumnNames {
+    text-transform: capitalize;
+    display: flex;
+    height: 56px;
+    padding: 10px;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+    background: #F7F7F7;
+    color: #000;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: "Inter", sans-serif !important;
 }

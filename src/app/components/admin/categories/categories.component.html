@@ -1,1 +1,130 @@
-<p>categories works!</p>
+<h3 class="mx-3 mb-3 mt-4">Category add</h3>
+<div class="row  py-3 pb-4 rounded border-b border-dashed">
+    <div class="col-md-4 border-r">
+        <div class="col-md-9">
+            <div class="field relative">
+                <input [(ngModel)]="name" type="text" placeholder="Category..." id="searchQuery" name="searchQuery"
+                    class="search-input" />
+            </div>
+        </div>
+
+        <div class="col-md-9 mt-3">
+            <div class="field">
+                <button type="button" class="bg-danger text-white col-12 rounded-3xl py-2"
+                    (click)="handleSaveCategory()">
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <div class="rounded overflow-auto border checbox-table">
+            <table class="rounded smallRow" mat-table [dataSource]="dataSource">
+
+                <ng-container matColumnDef="category">
+                    <th mat-header-cell *matHeaderCellDef>
+                        <div class="headerColumnNames">
+                            Category
+                        </div>
+                    </th>
+                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="status">
+                    <th mat-header-cell *matHeaderCellDef>
+                        <div class="headerColumnNames justify-content-center align-items-center">
+                            #
+                        </div>
+                    </th>
+                    <td mat-cell *matCellDef="let element;let i = index">
+                        <div class="text-center">
+                            <i type="button" (click)="deleteLine(element._id)"
+                                class="text-danger fa-solid fa-trash icon  "></i>
+                        </div>
+                    </td>
+                </ng-container>
+
+                <tr *matNoDataRow>
+                    <th colspan="10" class="text-center">
+                        <span>No rows found</span>
+                    </th>
+                </tr>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                           showFirstLastButtons
+                           aria-label="Select page of periodic elements">
+            </mat-paginator> -->
+        </div>
+    </div>
+</div>
+
+
+<h3 class="mx-3 mb-3 mt-5">Video add</h3>
+
+<form [formGroup]="formGroup">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="field mb-0">
+                <label for="complexName" class="font-medium text-black required-label">Video
+                </label>
+                <div class="relative">
+                    <input type="file" accept=".mp4" #file id="fileContract" name="fileContract"
+                        (change)="uploadFile($event)" class="selectfileInputPay" aria-label="0.0" />
+                    <input type="text" placeholder="Video..." [value]="FF['projectFileName'].value" disable />
+                    <img (click)="file.click()" class="absolute right-0 top-0 h-full"
+                        src="../../../../../assets/icons/document-clip.svg" alt="">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="field">
+                <label for="title" class="font-medium text-black required-label">Title</label>
+                <input autocomplete="off" placeholder="Title..." type="text" formControlName="title" id="title" name="title" />
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="field">
+                <label for="description" class="font-medium text-black required-label">Description</label>
+                <input autocomplete="off" type="text" placeholder="Description..." formControlName="description" id="description"
+                    name="description" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row ">
+        <div class="col-md-3">
+            <div class="field mb-0">
+                <label for="category" class="font-medium text-black required-label">Category</label>
+                <mat-form-field class="col-12">
+                    <mat-select formControlName="categoryId" id="category" name="category">
+                        <mat-option *ngFor="let item of categories" [value]="item.name">{{item.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="field">
+                <label for="description" class="font-medium text-black required-label">Description</label>
+                <input autocomplete="off" type="text" placeholder="Description..." formControlName="description" id="description"
+                    name="description" />
+            </div>
+        </div>
+
+        <div class="col-md-3 mt-4">
+            <div class="field">
+                <button type="button" class="bg-danger text-white col-12 rounded-3xl py-2"
+                    (click)="handleSaveVideo()">
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+</form>

@@ -12,6 +12,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CategoriesComponent } from './components/admin/categories/categories.component';
 import { NewVideoComponent } from './components/admin/new-video/new-video.component';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,8 @@ import { NewVideoComponent } from './components/admin/new-video/new-video.compon
     MatCheckboxModule,
     MatSelectModule,
     BrowserAnimationsModule,
+    MatTableModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

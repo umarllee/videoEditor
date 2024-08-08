@@ -1,1 +1,78 @@
-<p>new-video works!</p>
+<div class="row align-items-center gap-y-2 mt-4 px-3">
+    <div class="col-md-4">
+        <p class="m-0 text-lg font-semibold">
+            Videos
+        </p>
+    </div>
+    <div class="col-md-8 row align-items-center justify-content-end gap-y-2">
+        <div class="col-md-3 pt-3">
+            <div class="field ">
+                <mat-form-field class="col-12">
+                    <mat-select [(ngModel)]="categoryId" id="categoryId" name="categoryId"
+                        (selectionChange)="onCategoryChange()">
+                        <mat-option value="All">All</mat-option>
+                        <mat-option *ngFor="let item of categories" [value]="item.name">{{item.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="field relative">
+                <input type="text" [(ngModel)]="searchQuery" id="searchQuery" name="searchQuery" (keyup)="onSearch()"
+                    placeholder="Search videos by description..." class="search-input" />
+
+                <i class="absolute right-4  top-2 fa-regular fa-magnifying-glass"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p *ngIf="!filteredVideos.length" class="text-center font-semibold mt-2">No data found...</p>
+
+<ul class="row my-4 gap-y-4 p-0 px-3 pb-4 " *ngIf="filteredVideos.length">
+    <li class="col-md-4 mt-3" *ngFor="let video of filteredVideos; let i = index">
+        <div class="flip" [ngClass]="{'flip-flop': video.state }">
+            <div class="front">
+                <div class=" education relative rounded">
+                    <div class="card-pattern cursor-pointer right-4 top-2 " (click)="cardClicked(i)">
+                        <i class="fa-solid fa-info"></i>
+                    </div>
+
+                    <div class="circle">
+                        <video controls class="rounded-t-lg w-full" style="max-height: 50vh;">
+                            <source
+                            [src]="'http://localhost:7777/' + video.filePath"
+                                type="video/mp4">
+                            <source
+                            [src]="'http://localhost:7777/' + video.filePath"
+                                type="video/ogg">
+                            Your browser does not support HTML video.
+                        </video>
+                    </div>
+                    <div class="row py-3 px-2">
+                        <p style="color: #DB4444;" class="col-sm-6 text-xl font-medium px-2">
+                            {{ video.title }}
+                        </p>
+                        <p class="col-sm-6 text-2xl text-end font-medium  px-2" *ngIf="video.country">
+                            <i style="color: #DB4444;" class=" me-1 fa-sharp fa-regular fa-location-dot"></i> {{ video.country }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="back ">
+                <div class="bg-slate-100 pt-3 education h-full rounded">
+                    <div class="card-pattern right-4 top-2  cursor-pointer " (click)="cardClicked(i)">
+                        <i class="fa-solid fa-info"></i>
+                    </div>
+
+                    <p class="contentCard h-full py-3 px-2">
+                        <span class="d-block font-semibold text-lg mb-2" style="color: #DB4444;">Description: </span>
+                        {{ video.description }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </li>
+</ul>
