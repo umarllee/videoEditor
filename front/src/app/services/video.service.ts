@@ -18,7 +18,11 @@ export class VideoService {
     return this.http.get<any[]>(`${this.baseUrl}/category`);
   }
 
-  deleteVideo(id:number) {  // Yeni metod əlavə edildi
-    return this.http.get<any[]>(`${this.baseUrl}/video/`+id);
+  // deleteVideo(id:number) {  // Yeni metod əlavə edildi
+  //   return this.http.delete<any[]>(`${this.baseUrl}/video/`+id);
+  // }
+
+  deleteVideo(id: any): Observable<any[]> {
+    return this.http.delete<any[]>(`${this.baseUrl}/video/` + id);
   }
 }

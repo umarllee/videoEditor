@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { AdminService } from 'src/app/services/admin.service';
+import { VideoService } from 'src/app/services/video.service';
 import { swalInfo, swalSuccess } from 'src/app/utils/alert';
 import Swal from 'sweetalert2';
 
@@ -20,6 +21,12 @@ export class CategoriesComponent {
   categories: any[] = [];
   file?: File | null = null;
   fileResult: string | ArrayBuffer | null = null;
+  videos: any[] = [];
+  filteredVideos: any[] = [];
+
+  cardClicked(id: number) {
+    this.filteredVideos[id].state = !this.filteredVideos[id].state;
+  }
 
   generateForm() {
     this.formGroup = this.fb.group({
@@ -39,11 +46,30 @@ export class CategoriesComponent {
   }
 
   constructor(
+    private videoService: VideoService,
     private fb: FormBuilder,
     private adminService: AdminService,
   ) { }
 
+  getAllvideos(){
+    this.videoService.getAllVideos().subscribe(
+      {
+        next: data => {
+          this.videos = data;
+          this.filteredVideos = data;
+          this.filteredVideos.forEach((item, key) => {
+            this.filteredVideos[key].state = false;
+          });
+        },
+        error: error => {
+          console.error('Error fetching videos', error);
+        }
+      }
+    );
+  }
+
   ngOnInit() {
+  this.getAllvideos();
     this.adminService.getAllCategories().subscribe({
       next: res => {
         this.categories = res
@@ -91,6 +117,16 @@ export class CategoriesComponent {
         })
         // this.dataSource = new MatTableDataSource<any>(this.dataSource.data.filter((dt: any, key: number) => key != index))
       }
+    })
+  }
+
+  deleteVideo(id: number) {
+    this.videoService.deleteVideo(id).subscribe({
+      next: (res: any) => {
+        swalSuccess(res.message);
+        this.getAllvideos();
+      },
+      error: err => console.log(err)
     })
   }
 

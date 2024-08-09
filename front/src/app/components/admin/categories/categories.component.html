@@ -148,3 +148,54 @@
         </div>
     </form>
 </div>
+
+
+<ul class="row my-4 gap-y-4 p-0 px-3 pb-4 ">
+    <li class="col-md-3 mt-3" *ngFor="let video of filteredVideos; let i = index">
+        <div class="flip" [ngClass]="{'flip-flop': video.state }">
+            <div class="front">
+                <div class=" education relative rounded">
+                    <div class="card-pattern cursor-pointer right-4 top-2 " (click)="cardClicked(i)">
+                        <i class="fa-solid fa-info"></i>
+                    </div>
+                    <div class="card-pattern cursor-pointer right-4 top-5" style="top: 40px;" (click)="deleteVideo(video._id)">
+                        <i class="fa-solid fa-trash"></i>
+                    </div>
+
+                    <div class="circle">
+                        <video controls class="rounded-t-lg w-full" style="height: 50vh;">
+                            <source
+                            [src]="'http://localhost:7777/' + video.filePath"
+                                type="video/mp4">
+                            <source
+                            [src]="'http://localhost:7777/' + video.filePath"
+                                type="video/ogg">
+                            Your browser does not support HTML video.
+                        </video>
+                    </div>
+                    <div class="row py-3 px-2">
+                        <p style="color: #DB4444;" class="col-sm-6 text-xl font-medium px-2">
+                            {{ video.title }}
+                        </p>
+                        <p class="col-sm-6 text-2xl text-end font-medium  px-2" *ngIf="video.country">
+                            <i style="color: #DB4444;" class=" me-1 fa-sharp fa-regular fa-location-dot"></i> {{ video.country }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="back ">
+                <div class="bg-slate-100 pt-3 education h-full rounded">
+                    <div class="card-pattern right-4 top-2  cursor-pointer " (click)="cardClicked(i)">
+                        <i class="fa-solid fa-info"></i>
+                    </div>
+
+                    <p class="contentCard h-full py-3 px-2">
+                        <span class="d-block font-semibold text-lg mb-2" style="color: #DB4444;">Description: </span>
+                        {{ video.description }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </li>
+</ul>
