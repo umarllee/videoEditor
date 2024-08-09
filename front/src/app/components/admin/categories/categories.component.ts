@@ -142,7 +142,6 @@ export class CategoriesComponent {
   }
 
   handleSaveVideo() {
-    console.log(this.formGroup.value);
     if (this.formGroup.valid) {
       this.isFormValid = true;
       // this.complexService.addOrUpdateComplex(this.formGroup.value, this.file).subscribe({
@@ -157,6 +156,7 @@ export class CategoriesComponent {
           swalSuccess("Succesfully saved!"),
           this.UpdateData = '';
           this.generateForm();
+          this.getAllvideos();
         },
         error: err => console.log(err)
       })
